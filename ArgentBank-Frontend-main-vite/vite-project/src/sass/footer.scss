@@ -1,0 +1,15 @@
+// Début code Johan
+//Contient la mise en page du Footer du site
+.footer {
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #ccc;
+  padding: 2rem 0 1.5rem;
+}
+
+.footer-text {
+  margin: 0;
+  padding: 0;
+}
+
+//Fin code Johan
