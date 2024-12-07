@@ -1,12 +1,21 @@
 //Début code Johan
+
+import { useContext } from "react"; // Import de useContext pour accéder au contexte
+import { AuthContext } from "./store/AuthContext"; // Import de AuthContext
+
 const User = () => {
+  // Accès aux données d'authentification via le contexte
+  const { userName } = useContext(AuthContext); // Récupère le nom de l'utilisateur
+
   return (
     <main className="main bg-dark">
       <div className="header">
+        {/* Affiche le nom de l'utilisateur si disponible */}
         <h1 className="title_user">
           Welcome back
           <br />
-          Tony Jarvis!
+          {userName ? userName : "User"}
+          {/* Affiche un texte par défaut si userName est undefined */}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>

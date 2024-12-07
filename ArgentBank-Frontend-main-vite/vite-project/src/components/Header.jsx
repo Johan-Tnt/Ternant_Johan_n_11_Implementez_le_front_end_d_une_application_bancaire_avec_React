@@ -1,19 +1,28 @@
 //Début code Johan
 
-//Contient les "icon" fontawesome imports
+//Importation des modules nécessaires
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-//Contient le "header" (react router)
+import {
+  faCircleUser,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-
-/**WARNING**/
-//Le NavLink : "Sign out" doit apparaître dans le composant "user "par la suite et non sur la page "home"
+//Utilisation du contexte pour vérifier si l'utilisateur est connecté et récupérer ses informations
+import { useContext } from "react";
+import { AuthContext } from "./store/AuthContext";
 
 const Header = () => {
+  //Récupération des données de connexion depuis le contexte AuthContext
+  const { isLoggedIn, logout, userName } = useContext(AuthContext);
+
+  console.log("Header rendu :");
+  console.log("Utilisateur connecté :", isLoggedIn);
+  console.log("Nom de l'utilisateur :", userName);
+
   return (
     <div className="header">
       <nav className="main-nav">
+        {/* Logo principal */}
         <a className="main-nav-logo" href="./">
           <img
             className="main-nav-logo-image"
@@ -23,22 +32,49 @@ const Header = () => {
           <h1 className="sr-only">Argent Bank</h1>
         </a>
         <ul>
-          <NavLink to="/SignIn" className="main-nav-item">
-            <FontAwesomeIcon
-              icon={faCircleUser}
-              size="lg"
-              className="fa fa-user-circle"
-            />
-            Sign In
-          </NavLink>
-          <NavLink to="/User" className="main-nav-item">
-            <FontAwesomeIcon
-              icon={faRightFromBracket}
-              size="lg"
-              className="fa fa-sign-out"
-            />
-            Sign Out
-          </NavLink>
+          {/* Affiche "Sign In" si l'utilisateur n'est pas connecté */}
+          {!isLoggedIn && (
+            <NavLink to="/SignIn" className="main-nav-item">
+              <FontAwesomeIcon
+                icon={faCircleUser}
+                size="lg"
+                className="fa fa-user-circle"
+              />
+              Sign In
+            </NavLink>
+          )}
+
+          {/* Affiche le nom de l'utilisateur et le bouton "Sign Out" si connecté */}
+          {isLoggedIn && (
+            <>
+              {/* Affichage du nom d'utilisateur */}
+              <NavLink to="/SignIn" className="main-nav-item main_item_span">
+                <FontAwesomeIcon
+                  icon={faCircleUser}
+                  size="lg"
+                  className="fa fa-user-circle font_icon_profile"
+                />
+                {userName}
+              </NavLink>
+
+              {/* Bouton pour se déconnecter */}
+              <NavLink
+                to="/" // Redirection vers la page d'accueil après déconnexion
+                className="main-nav-item"
+                onClick={() => {
+                  console.log("Bouton 'Sign Out' cliqué.");
+                  logout(); // Appelle la fonction de déconnexion
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faRightFromBracket}
+                  size="lg"
+                  className="fa fa-sign-out font_icon_profile"
+                />
+                Sign Out
+              </NavLink>
+            </>
+          )}
         </ul>
       </nav>
     </div>
