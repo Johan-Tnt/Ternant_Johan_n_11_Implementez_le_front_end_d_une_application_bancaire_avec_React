@@ -15,14 +15,11 @@ const Header = () => {
   //Récupération des données de connexion depuis le contexte AuthContext
   const { isLoggedIn, logout, userName } = useContext(AuthContext);
 
-  console.log("Header rendu :");
-  console.log("Utilisateur connecté :", isLoggedIn);
-  console.log("Nom de l'utilisateur :", userName);
+  console.log("État utilisateur :", { isLoggedIn, userName });
 
   return (
     <div className="header">
       <nav className="main-nav">
-        {/* Logo principal */}
         <a className="main-nav-logo" href="./">
           <img
             className="main-nav-logo-image"

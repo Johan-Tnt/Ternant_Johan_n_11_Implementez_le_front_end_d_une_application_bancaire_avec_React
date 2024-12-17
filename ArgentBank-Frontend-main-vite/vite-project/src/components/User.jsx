@@ -1,24 +1,48 @@
 //Début code Johan
 
-import { useContext } from "react"; // Import de useContext pour accéder au contexte
-import { AuthContext } from "./store/AuthContext"; // Import de AuthContext
+//Import des hooks React
+import { useContext, useState } from "react";
+//Import du contexte d'authentification
+import { AuthContext } from "./store/AuthContext";
+//Import du composant ModalEditUserName
+import ModalEditUserName from "./store/ModalEditUserName";
 
 const User = () => {
-  // Accès aux données d'authentification via le contexte
-  const { userName } = useContext(AuthContext); // Récupère le nom de l'utilisateur
+  const { userName, updateUserProfile } = useContext(AuthContext); //Récupère le contexte
+  const [isModalOpen, setIsModalOpen] = useState(false); //État pour gérer la modale
+
+  //Fonction pour ouvrir la modale
+  const openModal = () => setIsModalOpen(true);
+  //Fonction pour fermer la modale
+  const closeModal = () => setIsModalOpen(false);
+
+  //Fonction pour sauvegarder le nouveau nom
+  const saveUserName = async (newUserName) => {
+    await updateUserProfile(newUserName); //Appelle l'API via le contexte
+    setIsModalOpen(false); //Ferme la modale après succès
+  };
 
   return (
     <main className="main bg-dark">
       <div className="header">
-        {/* Affiche le nom de l'utilisateur si disponible */}
         <h1 className="title_user">
           Welcome back
           <br />
           {userName ? userName : "User"}
-          {/* Affiche un texte par défaut si userName est undefined */}
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" onClick={openModal}>
+          Edit Name
+        </button>
       </div>
+
+      {/*Modale*/}
+      <ModalEditUserName
+        userName={userName}
+        isOpen={isModalOpen}
+        onSave={saveUserName}
+        onCancel={closeModal}
+      />
+
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
         <div className="account-content-wrapper">

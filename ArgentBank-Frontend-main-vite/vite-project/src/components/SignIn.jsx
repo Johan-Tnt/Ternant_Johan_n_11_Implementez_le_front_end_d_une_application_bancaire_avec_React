@@ -37,25 +37,18 @@ const SignIn = () => {
       console.log("Utilisateur déjà connecté, redirection en cours...");
       navigate("/user");
     }
-  }, [isLoggedIn, navigate]); // S'exécute à chaque changement de `isLoggedIn`
+  }, [isLoggedIn, navigate]); //S'exécute à chaque changement de `isLoggedIn`
 
   //Gestion de la soumission du formulaire
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
     console.log("État de Remember Me à la soumission :", rememberMe);
 
     try {
-      //Appel de la fonction `login` fournie par le contexte
       const success = await login(email, password, rememberMe);
       if (success) {
         console.log("Connexion réussie.");
-        //Sauvegarde ou suppression de l'email dans localStorage selon la case "Remember Me"
-        if (rememberMe) {
-          localStorage.setItem("rememberedEmail", email);
-        } else {
-          localStorage.removeItem("rememberedEmail");
-        }
-        //Redirection vers la page utilisateur
+        handleRememberMe(email, rememberMe);
         navigate("/user");
       } else {
         console.log("Échec de la connexion.");
@@ -64,6 +57,19 @@ const SignIn = () => {
     } catch (err) {
       console.error("Erreur lors de la soumission :", err);
       setError("Impossible de se connecter. Veuillez réessayer plus tard.");
+    }
+  };
+
+  //Gérer le stockage de l'email avec Remember Me
+  const handleRememberMe = (email, remember, userName) => {
+    if (remember) {
+      //Le code ci-dessous permet de sauvegarder l'e-mail lorsque l'utilisateur coche la case rememberMe
+      localStorage.setItem("rememberedEmail", email);
+      //Le code ci-dessous permet de sauvegarder le userName lorsque l'utilisateur coche la case rememberMe
+      localStorage.setItem("rememberedUserName", userName);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+      localStorage.removeItem("rememberedUserName");
     }
   };
 
@@ -110,7 +116,10 @@ const SignIn = () => {
                 console.log("Remember Me cochée :", e.target.checked);
                 setRememberMe(e.target.checked);
                 if (!e.target.checked)
+                  //Le code ci-dessous permet de sauvegarder l'e-mail lorsque l'utilisateur coche la case rememberMe
                   localStorage.removeItem("rememberedEmail");
+                //Le code ci-dessous permet de sauvegarder le userName lorsque l'utilisateur coche la case rememberMe
+                localStorage.removeItem("rememberedUserName");
               }}
             />
             <label htmlFor="remember-me">Remember me</label>
