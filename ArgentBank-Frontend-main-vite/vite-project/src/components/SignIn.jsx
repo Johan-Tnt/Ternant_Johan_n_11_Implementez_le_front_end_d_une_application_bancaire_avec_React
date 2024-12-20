@@ -27,14 +27,12 @@ const SignIn = () => {
     if (savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true);
-      console.log("Email pré-rempli depuis localStorage :", savedEmail);
     }
   }, []); //S'exécute une seule fois au montage du composant
 
   //Redirection automatique vers la page utilisateur si l'utilisateur est déjà connecté
   useEffect(() => {
     if (isLoggedIn) {
-      console.log("Utilisateur déjà connecté, redirection en cours...");
       navigate("/user");
     }
   }, [isLoggedIn, navigate]); //S'exécute à chaque changement de `isLoggedIn`
@@ -42,20 +40,16 @@ const SignIn = () => {
   //Gestion de la soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("État de Remember Me à la soumission :", rememberMe);
 
     try {
       const success = await login(email, password, rememberMe);
       if (success) {
-        console.log("Connexion réussie.");
         handleRememberMe(email, rememberMe);
         navigate("/user");
       } else {
-        console.log("Échec de la connexion.");
         setError("Identifiants incorrects ou problème de connexion.");
       }
-    } catch (err) {
-      console.error("Erreur lors de la soumission :", err);
+    } catch {
       setError("Impossible de se connecter. Veuillez réessayer plus tard.");
     }
   };
@@ -113,7 +107,6 @@ const SignIn = () => {
               id="remember-me"
               checked={rememberMe}
               onChange={(e) => {
-                console.log("Remember Me cochée :", e.target.checked);
                 setRememberMe(e.target.checked);
                 if (!e.target.checked)
                   //Le code ci-dessous permet de sauvegarder l'e-mail lorsque l'utilisateur coche la case rememberMe

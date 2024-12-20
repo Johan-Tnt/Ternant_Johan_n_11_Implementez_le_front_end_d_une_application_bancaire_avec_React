@@ -11,12 +11,10 @@ export const loginUser = (email, password, rememberMe) => async (dispatch) => {
     const response = await loginUserApi(email, password);
 
     if (!response.ok) {
-      console.error("Erreur de connexion API :", response);
       return false;
     }
 
     const data = await response.json();
-    console.log("Réponse API reçue :", data);
 
     const { token, userName } = data.body || {};
     const storage = rememberMe ? localStorage : sessionStorage;
@@ -32,13 +30,11 @@ export const loginUser = (email, password, rememberMe) => async (dispatch) => {
 
     const profileSuccess = await dispatch(fetchUserProfile());
     if (!profileSuccess) {
-      console.error("Échec de la récupération du profil utilisateur.");
       return false;
     }
 
     return true;
-  } catch (error) {
-    console.error("Erreur lors de la tentative de connexion :", error);
+  } catch {
     return false;
   }
 };
@@ -48,7 +44,6 @@ export const fetchUserProfile = () => async (dispatch, getState) => {
   const { token } = getState().user;
 
   if (!token) {
-    console.error("Aucun token disponible pour récupérer le profil.");
     return false;
   }
 
@@ -56,28 +51,19 @@ export const fetchUserProfile = () => async (dispatch, getState) => {
     const response = await fetchUserProfileApi(token);
 
     if (!response.ok) {
-      console.error("Erreur lors de la récupération du profil :", response);
       return false;
     }
 
     const data = await response.json();
-    console.log("Profil utilisateur récupéré :", data);
 
     const { id, userName } = data.body || {};
     if (!id || !userName) {
-      console.error(
-        "Les données du profil utilisateur sont manquantes ou incomplètes."
-      );
       return false;
     }
 
     dispatch(setProfile({ id, userName }));
     return true;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération du profil utilisateur :",
-      error
-    );
+  } catch {
     return false;
   }
 };

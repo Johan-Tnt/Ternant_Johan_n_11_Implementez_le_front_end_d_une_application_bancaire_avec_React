@@ -2,7 +2,6 @@
 
 //Fonction pour gérer la connexion utilisateur via une requête API
 export const loginUserApi = async (email, password) => {
-  console.log("Tentative de connexion avec les données :", { email, password });
   const response = await fetch("http://localhost:3001/api/v1/user/login", {
     method: "POST",
     headers: {

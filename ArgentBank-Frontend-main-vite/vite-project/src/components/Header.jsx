@@ -15,8 +15,6 @@ const Header = () => {
   //Récupération des données de connexion depuis le contexte AuthContext
   const { isLoggedIn, logout, userName } = useContext(AuthContext);
 
-  console.log("État utilisateur :", { isLoggedIn, userName });
-
   return (
     <div className="header">
       <nav className="main-nav">
@@ -59,7 +57,6 @@ const Header = () => {
                 to="/" // Redirection vers la page d'accueil après déconnexion
                 className="main-nav-item"
                 onClick={() => {
-                  console.log("Bouton 'Sign Out' cliqué.");
                   logout(); // Appelle la fonction de déconnexion
                 }}
               >

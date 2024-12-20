@@ -21,14 +21,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      console.log("setUser action payload:", { token: action.payload.token });
       state.token = action.payload.token;
     },
     setProfile: (state, action) => {
-      console.log("setProfile action payload:", {
-        id: action.payload.id,
-        userName: action.payload.userName,
-      });
       state.userId = action.payload.id;
       state.userName = action.payload.userName;
       sessionStorage.setItem("userId", action.payload.id);
@@ -37,7 +32,6 @@ const userSlice = createSlice({
       localStorage.setItem("userName", action.payload.userName);
     },
     logout: (state) => {
-      console.log("Déconnexion du user. Suppression des données.");
       state.token = null;
       state.userId = null;
       state.userName = null;

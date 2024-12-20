@@ -16,13 +16,11 @@ export const updateUserProfileAPI = async (newUserName, token) => {
     if (!response.ok) {
       //Gestion des erreurs côté serveur
       const errorData = await response.json(); //Récupère les détails de l'erreur
-      console.error("Erreur de mise à jour:", errorData.message);
       throw new Error(errorData.message || "Failed to update profile."); //Génération d'une exception pour remonter l'erreur
     }
 
-    // Si la réponse est correcte, convertir en JSON
+    //Si la réponse est correcte, convertir en JSON
     const data = await response.json();
-    console.log("Profil mis à jour avec succès:", data);
     return data; //Retourne les données pour validation si nécessaire
   } catch (error) {
     //Gestion des exceptions réseau ou autres

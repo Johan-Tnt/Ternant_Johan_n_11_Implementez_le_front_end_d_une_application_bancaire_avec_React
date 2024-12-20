@@ -34,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
       login(dispatch, email, password, rememberMe), //Fonction de connexion
     logout: () => logoutHandler(dispatch), //Fonction de déconnexion
     updateUserProfile: (newUserName) =>
-      updateUserProfile(dispatch, newUserName, token), //Nouvelle méthode API
+      updateUserProfile(dispatch, newUserName, token), //Méthode API
   };
 
   //Retourne le fournisseur de contexte enveloppant ses enfants

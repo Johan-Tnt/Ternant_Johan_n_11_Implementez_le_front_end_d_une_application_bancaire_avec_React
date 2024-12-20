@@ -19,7 +19,6 @@ const ModalEditUserName = ({ userName, isOpen, onSave, onCancel }) => {
     setIsSaving(true); //Démarre l'indicateur de sauvegarde
     try {
       await onSave(newUserName); //Appelle la fonction passée en prop pour sauvegarder
-      console.log("Nom d'utilisateur mis à jour :", newUserName);
     } catch (error) {
       alert(`Error updating user profile: ${error.message}`);
     } finally {

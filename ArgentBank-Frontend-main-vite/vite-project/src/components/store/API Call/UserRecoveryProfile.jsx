@@ -2,7 +2,6 @@
 
 //Fonction pour récupérer le profil utilisateur via une requête API
 export const fetchUserProfileApi = async (token) => {
-  console.log("Récupération du profil utilisateur.");
   const response = await fetch("http://localhost:3001/api/v1/user/profile", {
     method: "GET",
     headers: {

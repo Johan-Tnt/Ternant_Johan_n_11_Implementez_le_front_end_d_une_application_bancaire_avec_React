@@ -1,5 +1,5 @@
 //Début code Johan
-//Contient le menu principal "home"
+//Contient le menu principal "Home"
 
 const Home = () => {
   return (

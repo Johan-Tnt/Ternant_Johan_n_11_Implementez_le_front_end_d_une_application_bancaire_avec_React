@@ -11,16 +11,10 @@ export const restoreAuth = (dispatch) => {
 
   if (token && userName) {
     //Si le token et userName sont présents
-    console.log("Restauration des données utilisateur :", {
-      token,
-      userId,
-      userName,
-    });
     dispatch(setUser({ token })); //Met à jour le token dans Redux
     dispatch(setProfile({ userId, userName })); //Met à jour le profil utilisateur dans Redux
   } else {
     //Si aucun token n'est trouvé
-    console.log("Aucun token trouvé dans sessionStorage.");
   }
 };
 
