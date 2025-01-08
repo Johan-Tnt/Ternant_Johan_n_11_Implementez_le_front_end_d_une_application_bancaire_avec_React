@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Swagger Argent Bank - OpenAPI 3.0
+  description: |-
+    This is a sample Argent Bank Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the Argent Bank, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    _If you're looking for the Swagger 2.0/OAS 2.0 version of Argent Bank, then click [here](https://editor.swagger.io). Alternatively, you can load via the `Edit > Load Argent Bank OAS 2.0` menu option!_
+    
+    Some useful links:
+    - [The Argent Bank repository](https://github.com/Johan-Tnt/Ternant_Johan_n_11_Implementez_le_front_end_d_une_application_bancaire_avec_React)
+    - [The source API definition for the Argent Bank](https://github.com/Johan-Tnt/Ternant_Johan_n_11_Implementez_le_front_end_d_une_application_bancaire_avec_React/tree/main/ArgentBank-Backend-main).
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://argentbank.swagger.io/api/v3
+tags:
+  - name: transactions
+    description: Everything about your transactions
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /transactions:
+    get:
+      summary: Allows you to retrieve information about all banking transactions. 
+      description: The date, description and amounts (figures) of banking transactions, the types of transactions as well as the categories and note for each transaction.
+      tags:
+      - transactions
+      responses:
+        "200": # status code
+          description: Sucessful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - id: string
+                    date: string
+                    description: string
+                    amount: string
+                    balance: string
+                    transaction type: string
+                    category: string
+                    note: string
+        "401": # status code
+          description: Missing authentication
+        "403": # status code
+          description: Bad authentication
+        "500": # status code
+          description: Internal server error
+      security:
+      - Bearer: []  
+      
+  /transactions/<transactionid>:
+    put:
+      summary: To allow changing the category and rating of a bank transaction.
+      description: Changing the  category and grade.
+      tags:
+      - transactions
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items: 
+                  type: string
+            example:
+              category: string
+              note: string
+      
+      responses:
+        "204": # status code
+          description: Sucessful operation
+        "401": # status code
+          description: Missing authentication
+        "403": # status code
+          description: Bad authentication
+        "404": # status code
+          description: Transaction not found
+        "500": # status code
+          description: Internal server error
+      security:
+      - Bearer: []  
+                  
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id: 
+          type: string
+        date: 
+          type: string
+        description:
+          type: string
+        amount: 
+          type: string
+        balance:
+          type: string
+        transactiontype: 
+          type: string
+        category: 
+          type: string
+        note: 
+          type: string
+      
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+          
