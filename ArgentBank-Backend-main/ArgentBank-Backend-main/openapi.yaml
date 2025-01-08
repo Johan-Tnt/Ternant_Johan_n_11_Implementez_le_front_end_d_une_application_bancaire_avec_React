@@ -8,10 +8,10 @@ info:
     That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
 
     _If you're looking for the Swagger 2.0/OAS 2.0 version of Argent Bank, then click [here](https://editor.swagger.io). Alternatively, you can load via the `Edit > Load Argent Bank OAS 2.0` menu option!_
-    
+
     Some useful links:
     - [The Argent Bank repository](https://github.com/Johan-Tnt/Ternant_Johan_n_11_Implementez_le_front_end_d_une_application_bancaire_avec_React)
-    - [The source API definition for the Argent Bank](https://github.com/Johan-Tnt/Ternant_Johan_n_11_Implementez_le_front_end_d_une_application_bancaire_avec_React/tree/main/ArgentBank-Backend-main).
+    - [The source API definition for the Argent Bank](https://github.com/Johan-Tnt/Ternant_Johan_n_11_Implementez_le_front_end_d_une_application_bancaire_avec_React/blob/main/ArgentBank-Backend-main/ArgentBank-Backend-main/openapi.yaml).
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -33,10 +33,10 @@ tags:
 paths:
   /transactions:
     get:
-      summary: Allows you to retrieve information about all banking transactions. 
+      summary: Allows you to retrieve information about all banking transactions.
       description: The date, description and amounts (figures) of banking transactions, the types of transactions as well as the categories and note for each transaction.
       tags:
-      - transactions
+        - transactions
       responses:
         "200": # status code
           description: Sucessful operation
@@ -62,27 +62,27 @@ paths:
         "500": # status code
           description: Internal server error
       security:
-      - Bearer: []  
-      
+        - Bearer: []
+
   /transactions/<transactionid>:
     put:
       summary: To allow changing the category and rating of a bank transaction.
       description: Changing the  category and grade.
       tags:
-      - transactions
-      
+        - transactions
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: array
-              items: 
-                  type: string
+              items:
+                type: string
             example:
               category: string
               note: string
-      
+
       responses:
         "204": # status code
           description: Sucessful operation
@@ -95,8 +95,8 @@ paths:
         "500": # status code
           description: Internal server error
       security:
-      - Bearer: []  
-                  
+        - Bearer: []
+
 components:
   securitySchemes:
     Bearer:
@@ -107,23 +107,23 @@ components:
     Transaction:
       type: object
       properties:
-        id: 
+        id:
           type: string
-        date: 
+        date:
           type: string
         description:
           type: string
-        amount: 
+        amount:
           type: string
         balance:
           type: string
-        transactiontype: 
+        transactiontype:
           type: string
-        category: 
+        category:
           type: string
-        note: 
+        note:
           type: string
-      
+
     ApiResponse:
       type: object
       properties:
@@ -134,4 +134,3 @@ components:
           type: string
         message:
           type: string
-          
