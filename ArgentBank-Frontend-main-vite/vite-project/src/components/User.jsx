@@ -1,10 +1,10 @@
 //Début code Johan
 
-//Import des hooks React
+//Importation des hooks React
 import { useContext, useState } from "react";
-//Import du contexte d'authentification
+//Importation du contexte d'authentification
 import { AuthContext } from "./store/AuthContext";
-//Import du composant ModalEditUserName
+//Importation du composant ModalEditUserName
 import ModalEditUserName from "./store/ModalEditUserName";
 
 const User = () => {

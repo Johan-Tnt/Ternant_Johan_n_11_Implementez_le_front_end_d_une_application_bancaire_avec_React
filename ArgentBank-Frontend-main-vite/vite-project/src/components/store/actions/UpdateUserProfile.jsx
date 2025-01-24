@@ -12,8 +12,8 @@ export const updateUserProfile = async (dispatch, newUserName, token) => {
     return data; //Retourne les données mises à jour
   } catch (error) {
     //Gestion des erreurs lors de l'appel API
-    console.error("Erreur lors de la mise à jour du profil:", error.message);
-    throw error; //Relance l'erreur pour gestion éventuelle dans l'UI
+    console.error("Failed to update profile.:", error.message);
+    throw error;
   }
 };
 

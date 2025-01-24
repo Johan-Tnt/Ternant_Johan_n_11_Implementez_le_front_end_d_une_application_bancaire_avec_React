@@ -19,7 +19,7 @@ const AuthContextProvider = ({ children }) => {
   const { token, userId, userName } = useSelector((state) => state.user); //Récupération des données utilisateur depuis le store
   const isLoggedIn = !!token; //Détermine si l'utilisateur est connecté (si le token est présent)
 
-  //Restaurer l'authentification au démarrage
+  //Restaure l'authentification au démarrage
   useEffect(() => {
     restoreAuth(dispatch);
   }, [dispatch]);
@@ -43,12 +43,12 @@ const AuthContextProvider = ({ children }) => {
   );
 };
 
-//Validation des propriétés du composant fournisseur
+//Valide les propriétés du composant fournisseur
 AuthContextProvider.propTypes = {
   children: PropTypes.node.isRequired, //Le composant enfant est obligatoire
 };
 
-//Exportation du contexte et du fournisseur
+//Exporte le contexte et le fournisseur
 export { AuthContext, AuthContextProvider };
 
 //Fin code Johan

@@ -10,7 +10,7 @@ export const restoreAuth = (dispatch) => {
     sessionStorage.getItem("userName") || localStorage.getItem("userName");
 
   if (token && userName) {
-    //Si le token et userName sont présents
+    //Si le token et le userName sont présents
     dispatch(setUser({ token })); //Met à jour le token dans Redux
     dispatch(setProfile({ userId, userName })); //Met à jour le profil utilisateur dans Redux
   } else {

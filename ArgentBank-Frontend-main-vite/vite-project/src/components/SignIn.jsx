@@ -54,7 +54,7 @@ const SignIn = () => {
     }
   };
 
-  //Gérer le stockage de l'email avec Remember Me
+  //Gestion du stockage de l'email avec Remember Me
   const handleRememberMe = (email, remember, userName) => {
     if (remember) {
       //Le code ci-dessous permet de sauvegarder l'e-mail lorsque l'utilisateur coche la case rememberMe

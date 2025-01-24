@@ -5,9 +5,9 @@ export const updateUserProfileAPI = async (newUserName, token) => {
   try {
     //Appel API pour mettre à jour le profil
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-      method: "PUT", //Méthode HTTP PUT pour la mise à jour
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json", //Type de contenu JSON
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, //Ajout du token dans les headers pour l'authentification
       },
       body: JSON.stringify({ userName: newUserName }), //Corps de la requête contenant le nouveau nom d'utilisateur
@@ -19,13 +19,13 @@ export const updateUserProfileAPI = async (newUserName, token) => {
       throw new Error(errorData.message || "Failed to update profile."); //Génération d'une exception pour remonter l'erreur
     }
 
-    //Si la réponse est correcte, convertir en JSON
+    //Si la réponse est correcte, conversion en JSON
     const data = await response.json();
-    return data; //Retourne les données pour validation si nécessaire
+    return data;
   } catch (error) {
     //Gestion des exceptions réseau ou autres
-    console.error("Erreur lors de l'appel API:", error.message);
-    throw error; //Renvoyer l'erreur pour gestion par l'appelant
+    console.error("Failed to API call:", error.message);
+    throw error;
   }
 };
 

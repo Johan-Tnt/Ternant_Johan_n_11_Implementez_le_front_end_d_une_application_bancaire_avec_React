@@ -50,7 +50,7 @@ const ModalEditUserName = ({ userName, isOpen, onSave, onCancel }) => {
         <button
           className="edit-button modal-button"
           onClick={onCancel}
-          disabled={isSaving} //Désactive le bouton pendant la sauvegarde
+          disabled={isSaving}
         >
           Cancel
         </button>
