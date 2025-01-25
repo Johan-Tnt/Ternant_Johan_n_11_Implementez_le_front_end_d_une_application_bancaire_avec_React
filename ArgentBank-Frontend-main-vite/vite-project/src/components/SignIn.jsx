@@ -83,6 +83,8 @@ const SignIn = () => {
               type="email"
               id="email"
               value={email}
+              placeholder="Enter your e-mail"
+              aria-label="Your e-mail"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -95,6 +97,8 @@ const SignIn = () => {
               type="password"
               id="password"
               value={password}
+              placeholder="Enter your password"
+              aria-label="Your password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
