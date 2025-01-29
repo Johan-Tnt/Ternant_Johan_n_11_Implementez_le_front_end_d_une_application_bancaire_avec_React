@@ -58,7 +58,7 @@ paths:
         "401": # status code
           description: Missing authentication
         "403": # status code
-          description: Bad authentication
+          description: Forbidden - you are not allowed to access this resource, you do not have the rights
         "500": # status code
           description: Internal server error
       security:
@@ -89,7 +89,7 @@ paths:
         "401": # status code
           description: Missing authentication
         "403": # status code
-          description: Bad authentication
+          description: Forbidden - you are not allowed to access this resource, you do not have the rights
         "404": # status code
           description: Transaction not found
         "500": # status code
